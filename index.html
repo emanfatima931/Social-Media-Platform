@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialNetwork - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">📱 SocialNetwork</h1>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="pages/profile.html">Profile</a>
+                <a href="pages/friends.html">Friends</a>
+                <div class="user-info">
+                    <img id="userPic" src="https://ui-avatars.com/api/?name=User&background=1abc9c&color=fff" alt="User" class="navbar-pic">
+                    <span id="userName">User</span>
+                </div>
+                <button id="logoutBtn" class="btn-logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        <div class="main-content">
+            <!-- MIDDLE CONTENT -->
+            <div class="middle-content" style="margin: 0 auto;">
+                <!-- CREATE POST -->
+                <div class="card">
+                    <h3>What's on your mind?</h3>
+                    <form id="postForm">
+                        <textarea id="postText" placeholder="Share something..." rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; font-family: Arial;"></textarea>
+                        <button type="submit" class="btn-primary" style="margin-top: 10px; width: 100%;">Post</button>
+                    </form>
+                </div>
+
+                <!-- FEED -->
+                <div id="feed">
+                    <p style="text-align: center; color: #999;">No posts yet</p>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDEBAR -->
+            <div class="right-sidebar">
+                <div class="card">
+                    <h3>👥 Friends</h3>
+                    <div id="friendsList">
+                        <p>No friends yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Check authentication - wait for db to initialize
+        function checkAuth() {
+            if (!db || !db.currentUser) {
+                window.location.href = 'pages/login.html';
+            }
+        }
+        
+        // Check auth after a small delay to ensure db is initialized
+        setTimeout(checkAuth, 100);
+    </script>
+</body>
+</html>

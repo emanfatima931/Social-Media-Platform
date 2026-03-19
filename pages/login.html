@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SocialNetwork</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1abc9c, #16a085);
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .auth-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #1abc9c;
+            margin-bottom: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #1abc9c;
+            box-shadow: 0 0 5px rgba(26, 188, 156, 0.3);
+        }
+        .btn-auth {
+            width: 100%;
+            padding: 12px;
+            background: #1abc9c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn-auth:hover {
+            background: #16a085;
+        }
+        #errorMessage {
+            color: #e74c3c;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+            display: none;
+        }
+        .auth-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        .auth-link a {
+            color: #1abc9c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .auth-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h1>📱SocialNetwork</h1>
+        <h2>Login</h2>
+
+        <div id="errorMessage"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+            </div>
+
+            <button type="submit" class="btn-auth">Login</button>
+        </form>
+
+        <p class="auth-link">Don't have an account? <a href="register.html">Register here</a></p>
+
+        <!-- Demo Accounts -->
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; opacity: 0.7;">
+            <p style="text-align: center; color: #666; font-size: 12px;"><strong>Demo Accounts:</strong></p>
+            <p style="text-align: center; color: #666; font-size: 12px;">alice@example.com / password123</p>
+            <p style="text-align: center; color: #666; font-size: 12px;">bob@example.com / password123</p>
+        </div>
+    </div>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>
