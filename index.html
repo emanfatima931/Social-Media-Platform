@@ -69,6 +69,63 @@
             width: 100% !important;
             background-color: #1abc9c !important;
         }
+        
+        /* Image attachment styles */
+        .post-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            align-items: center;
+        }
+        
+        .attachment-btn {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+        
+        .attachment-btn:hover {
+            background: #e0e0e0;
+            border-color: #1abc9c;
+        }
+        
+        #imageInput {
+            display: none;
+        }
+        
+        .image-preview-container {
+            margin-top: 12px;
+            position: relative;
+            max-width: 300px;
+        }
+        
+        .image-preview-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            max-height: 400px;
+        }
+        
+        .remove-image-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .remove-image-btn:hover {
+            background: rgba(0,0,0,0.8);
+        }
     </style>
 </head>
 <body>
@@ -96,6 +153,14 @@
                 <h3>What's on your mind?</h3>
                 <form id="postForm">
                     <textarea id="postText" placeholder="Share something..." rows="3"></textarea>
+                    <div class="image-preview-container" id="imagePreviewContainer" style="display: none;">
+                        <img id="imagePreview" src="" alt="Preview">
+                        <button type="button" class="remove-image-btn" onclick="removeImage()">✕</button>
+                    </div>
+                    <div class="post-actions">
+                        <button type="button" class="attachment-btn" onclick="document.getElementById('imageInput').click();">📎 Attach Image</button>
+                    </div>
+                    <input type="file" id="imageInput" accept="image/*">
                     <button type="submit" class="btn-primary post-btn-header">Post</button>
                 </form>
             </div>
@@ -131,6 +196,30 @@
     <script src="js/auth.js"></script>
     <script src="js/app.js"></script>
     <script>
+        // Store selected image
+        let selectedImageData = null;
+        
+        // Handle image input change
+        document.getElementById('imageInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    selectedImageData = event.target.result; // Base64 image data
+                    document.getElementById('imagePreview').src = selectedImageData;
+                    document.getElementById('imagePreviewContainer').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Remove selected image
+        function removeImage() {
+            selectedImageData = null;
+            document.getElementById('imageInput').value = '';
+            document.getElementById('imagePreviewContainer').style.display = 'none';
+        }
+        
         // Check authentication - wait for db to initialize
         function checkAuth() {
             if (!db || !db.currentUser) {

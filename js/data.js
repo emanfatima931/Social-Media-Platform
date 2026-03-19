@@ -137,12 +137,13 @@ class Database {
         return posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     }
 
-    createPost(userId, content) {
+    createPost(userId, content, image = null) {
         const posts = this.getPosts();
         const newPost = {
             id: Date.now().toString(),
             userId: userId,
             content: content,
+            image: image,
             likes: [],
             comments: [],
             createdAt: new Date().toISOString()

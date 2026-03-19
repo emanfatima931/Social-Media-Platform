@@ -42,8 +42,13 @@ function handleCreatePost(e) {
         return;
     }
 
-    const post = db.createPost(db.currentUser.id, postText.value);
+    const post = db.createPost(db.currentUser.id, postText.value, selectedImageData || null);
     postText.value = '';
+    
+    // Clear the image preview
+    if (typeof removeImage === 'function') {
+        removeImage();
+    }
     
     showNotification('📝 Post created successfully!', 'success');
     loadPosts();
@@ -76,6 +81,7 @@ function loadPosts() {
                 <div class="post-content">
                     ${post.content}
                 </div>
+                ${post.image ? `<div class="post-image"><img src="${post.image}" alt="Post image" style="max-width: 100%; border-radius: 8px; margin: 10px 0;"></div>` : ''}
                 <div class="post-actions">
                     <button class="btn-action ${isLiked ? 'liked' : ''}" onclick="toggleLike('${post.id}')">
                         ${isLiked ? '❤️' : '🤍'} ${post.likes.length}
